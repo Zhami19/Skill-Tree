@@ -2,6 +2,7 @@ using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using Unity.VisualScripting;
 
 public class DemoGamePlay : MonoBehaviour
 {
@@ -19,8 +20,43 @@ public class DemoGamePlay : MonoBehaviour
     [SerializeField] GameObject UI;
     private UI theUI;
 
+    public enum Level
+    {
+        Level1,
+        Level2,
+        Level3
+    }
+
+    public static Level currentLevel;
+
+    private void LevelManagement()
+    {
+        switch(currentLevel)
+        {
+            case Level.Level1:
+                theUI.EnableButton(0);
+                theUI.DisableButton(1);
+                theUI.DisableButton(2);
+                theUI.DisableButton(3);
+                theUI.DisableButton(4);
+                theUI.DisableButton(5);
+                theUI.DisableButton(6);
+                break;
+            case Level.Level2:
+                theUI.EnableButton(1);
+                theUI.EnableButton(2);
+                break;
+            case Level.Level3:
+                theUI.EnableButton(3);
+                theUI.EnableButton(4);
+                theUI.EnableButton(5);
+                theUI.EnableButton(6);
+                break;
+        }
+    }
     void Start()
     {
+        currentLevel = Level.Level1;
         theUI = UI.GetComponent<UI>();
 
         m = moneySystem.GetComponent<MoneySystem>();
@@ -63,6 +99,9 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle8);
         theUI.ChangeAlphaValue(6);
         m.SubtractMoney(70);
+        theUI.NoButton(3);
+        theUI.NoButton(4);
+        theUI.NoButton(5);
     }
 
     public void UnlockSkill6()
@@ -71,6 +110,9 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle7);
         theUI.ChangeAlphaValue(5);
         m.SubtractMoney(60);
+        theUI.NoButton(3);
+        theUI.NoButton(4);
+        theUI.NoButton(6);
     }
 
     public void UnlockSkill5()
@@ -79,6 +121,9 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle6);
         theUI.ChangeAlphaValue(4);
         m.SubtractMoney(50);
+        theUI.NoButton(3);
+        theUI.NoButton(5);
+        theUI.NoButton(6);
     }
 
     public void UnlockSkill4()
@@ -87,6 +132,9 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle5);
         theUI.ChangeAlphaValue(3);
         m.SubtractMoney(40);
+        theUI.NoButton(4);
+        theUI.NoButton(5);
+        theUI.NoButton(6);
     }
 
     public void UnlockSkill3()
@@ -95,6 +143,8 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle4);
         theUI.ChangeAlphaValue(2);
         m.SubtractMoney(30);
+        theUI.NoButton(1);
+        currentLevel = Level.Level3;
     }
 
     public void UnlockSkill2()
@@ -103,6 +153,8 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle3);
         theUI.ChangeAlphaValue(1);
         m.SubtractMoney(20);
+        theUI.NoButton(2);
+        currentLevel = Level.Level3;
     }
 
     public void UnlockSkill1()
@@ -111,6 +163,7 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills.Add(triangle2);
         theUI.ChangeAlphaValue(0);
         m.SubtractMoney(10);
+        currentLevel = Level.Level2;
     }
 
     /*public void UnlockSkills()

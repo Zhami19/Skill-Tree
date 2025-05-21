@@ -13,8 +13,8 @@ public class MoneySystem : MonoBehaviour
         Money += 5;
     }
 
-    public void SubtractMoney()
+    public void SubtractMoney(int cost)
     {
-        Money = 0;
+        Money -= cost;
     }
 }

@@ -20,11 +20,15 @@ public class DemoGamePlay : MonoBehaviour
     [SerializeField] GameObject UI;
     private UI theUI;
 
+    private bool path1 = false;
+    private bool path2 = false;
+
     public enum Level
     {
         Level1,
         Level2,
-        Level3
+        Level3,
+        Over
     }
 
     public static Level currentLevel;
@@ -41,16 +45,29 @@ public class DemoGamePlay : MonoBehaviour
                 theUI.DisableButton(4);
                 theUI.DisableButton(5);
                 theUI.DisableButton(6);
+                theUI.AvailableColor(0);
                 break;
             case Level.Level2:
                 theUI.EnableButton(1);
                 theUI.EnableButton(2);
+                theUI.AvailableColor(1);
+                theUI.AvailableColor(2);
                 break;
             case Level.Level3:
-                theUI.EnableButton(3);
-                theUI.EnableButton(4);
-                theUI.EnableButton(5);
-                theUI.EnableButton(6);
+                if (path1)
+                {
+                    theUI.EnableButton(3);
+                    theUI.EnableButton(4);
+                    theUI.AvailableColor(3);
+                    theUI.AvailableColor(4);
+                }
+                else if (path2)
+                {
+                    theUI.EnableButton(5);
+                    theUI.EnableButton(6);
+                    theUI.AvailableColor(5);
+                    theUI.AvailableColor(6);
+                }
                 break;
         }
     }
@@ -63,11 +80,13 @@ public class DemoGamePlay : MonoBehaviour
         unlockedSkills = new List<GameObject>();
         unlockedSkills.Add(triangle1);
         selectedSkill = unlockedSkills[0];
+        Debug.Log(currentLevel);
     }
 
     // Update is called once per frame
     void Update()
     {
+        LevelManagement();
         SelectSkill();
         Shoot();
     }
@@ -97,71 +116,77 @@ public class DemoGamePlay : MonoBehaviour
     {
         if (m.Money < 70 || unlockedSkills.Contains(triangle8)) { return; }
         unlockedSkills.Add(triangle8);
-        theUI.ChangeAlphaValue(6);
+        theUI.ChosenSkill(6);
         m.SubtractMoney(70);
         theUI.NoButton(3);
         theUI.NoButton(4);
         theUI.NoButton(5);
+        currentLevel = Level.Over;
     }
 
     public void UnlockSkill6()
     {
         if (m.Money < 60 || unlockedSkills.Contains(triangle7)) { return; }
         unlockedSkills.Add(triangle7);
-        theUI.ChangeAlphaValue(5);
+        theUI.ChosenSkill(5);
         m.SubtractMoney(60);
         theUI.NoButton(3);
         theUI.NoButton(4);
         theUI.NoButton(6);
+        currentLevel = Level.Over;
     }
 
     public void UnlockSkill5()
     {
         if (m.Money < 50 || unlockedSkills.Contains(triangle6)) { return; }
         unlockedSkills.Add(triangle6);
-        theUI.ChangeAlphaValue(4);
+        theUI.ChosenSkill(4);
         m.SubtractMoney(50);
         theUI.NoButton(3);
         theUI.NoButton(5);
         theUI.NoButton(6);
+        currentLevel = Level.Over;
     }
 
     public void UnlockSkill4()
     {
         if (m.Money < 40 || unlockedSkills.Contains(triangle5)) { return; }
         unlockedSkills.Add(triangle5);
-        theUI.ChangeAlphaValue(3);
+        theUI.ChosenSkill(3);
         m.SubtractMoney(40);
         theUI.NoButton(4);
         theUI.NoButton(5);
         theUI.NoButton(6);
+        currentLevel = Level.Over;
     }
 
     public void UnlockSkill3()
     {
         if (m.Money < 30 || unlockedSkills.Contains(triangle4)) { return; }
         unlockedSkills.Add(triangle4);
-        theUI.ChangeAlphaValue(2);
+        theUI.ChosenSkill(2);
         m.SubtractMoney(30);
         theUI.NoButton(1);
         currentLevel = Level.Level3;
+        path2 = true;
     }
 
     public void UnlockSkill2()
     {
         if (m.Money < 20 || unlockedSkills.Contains(triangle3)) { return; }
         unlockedSkills.Add(triangle3);
-        theUI.ChangeAlphaValue(1);
+        theUI.ChosenSkill(1);
         m.SubtractMoney(20);
         theUI.NoButton(2);
         currentLevel = Level.Level3;
+        path1 = true;
     }
 
     public void UnlockSkill1()
     {
         if (m.Money < 10 || unlockedSkills.Contains(triangle2)) { return; }
         unlockedSkills.Add(triangle2);
-        theUI.ChangeAlphaValue(0);
+        theUI.ChosenSkill(0);
         m.SubtractMoney(10);
         currentLevel = Level.Level2;
     }

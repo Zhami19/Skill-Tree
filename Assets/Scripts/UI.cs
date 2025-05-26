@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Collections;
 using TMPro;
 using UnityEngine.UI;
+using Unity.VisualScripting;
 
 public class UI : MonoBehaviour
 {
@@ -29,12 +30,12 @@ public class UI : MonoBehaviour
         moneyText.text = "Money: " + m.Money.ToString();
     }
 
-    public void ChangeAlphaValue(int button)
+    public void ChosenSkill(int button)
     {
         Image buttonImage = buttonList[button];
-        Color c = buttonImage.color;
+        /*Color c = buttonImage.color;
         c.a = 255;
-        buttonImage.color = c;
+        buttonImage.color = c;*/
         buttonImage.color = Color.blue;
     }
 
@@ -55,12 +56,37 @@ public class UI : MonoBehaviour
         buttonImage.color = Color.red;
     }
 
-    public void ChangeColor()
+    public void AvailableColor(int button)
     {
-        /*if (m.Money >= 70 || g.currentLevel )
+        Image buttonImage = buttonList[button];
+        if (button == 0 && m.Money >= 10)
         {
-
-        }*/
+            buttonImage.color = Color.white;
+        }
+        else if (button == 1 && m.Money >= 20)
+        {
+            buttonImage.color = Color.white;
+        }
+        else if (button == 2 && m.Money >= 30)
+        {
+            buttonImage.color = Color.white;
+        }
+        else if (button == 3 && m.Money >= 40)
+        {
+            buttonImage.color = Color.white;
+        }
+        else if (button == 4 && m.Money >= 50)
+        {
+            buttonImage.color = Color.white;
+        }
+        else if (button == 5 && m.Money >= 60)
+        {
+            buttonImage.color = Color.white;
+        }
+        else if (button == 6 && m.Money >= 70)
+        {
+            buttonImage.color = Color.white;
+        }
     }
 
     //Fix Levels, if left side is picked then right side is blocked and vice versa

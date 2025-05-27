@@ -1,6 +1,6 @@
 using UnityEngine;
 
-public class MoneySystem : MonoBehaviour
+public class MoneySystem : MonoBehaviour, IDataPersistence
 {
     public int Money { get; set; }
 
@@ -16,5 +16,15 @@ public class MoneySystem : MonoBehaviour
     public void SubtractMoney(int cost)
     {
         Money -= cost;
+    }
+
+    public void LoadData(GameData data)
+    {
+        Money = data.moneyCount;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.moneyCount = Money;
     }
 }

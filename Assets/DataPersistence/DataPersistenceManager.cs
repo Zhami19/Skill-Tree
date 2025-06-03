@@ -5,9 +5,15 @@ using System.Linq;
 
 public class DataPersistenceManager : MonoBehaviour
 {
+    [Header("File Storage Config")]
+
+    [SerializeField] private string fileName;
+
     private GameData gameData;
 
     private List<IDataPersistence> dataPersistenceObjects;
+
+    private FileDataHandler dataHandler;
     public static DataPersistenceManager instance {  get; private set; }
 
     private void Awake()
@@ -21,6 +27,7 @@ public class DataPersistenceManager : MonoBehaviour
 
     private void Start()
     {
+        this.dataHandler = new FileDataHandler(Application.persistentDataPath, fileName);
         this.dataPersistenceObjects = FindAllDataPersistenceObjects();
         LoadGame();
     }
@@ -33,7 +40,9 @@ public class DataPersistenceManager : MonoBehaviour
     public void LoadGame()
     {
         //load saved data
+        this.gameData = dataHandler.Load();
 
+        //if not data can be loaded, new game
         if (this.gameData == null)
         {
             Debug.Log("No data was found.  Initializing data to defaults.");
@@ -45,8 +54,6 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.LoadData(gameData);
         }
-
-        Debug.Log("Loaded money count = " + gameData.moneyCount);
     }
 
     public void SaveGame()
@@ -56,9 +63,9 @@ public class DataPersistenceManager : MonoBehaviour
         {
             dataPersistenceObj.SaveData(ref gameData);
         }
-        //save data with data handler
 
-        Debug.Log("Saved money count = " + gameData.moneyCount);
+        //save data with data handler
+        dataHandler.Save(gameData);
     }
 
     private void OnApplicationQuit()

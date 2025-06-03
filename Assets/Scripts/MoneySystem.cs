@@ -6,7 +6,7 @@ public class MoneySystem : MonoBehaviour, IDataPersistence
 
     private void Start()
     {
-        Money = 0;
+        //Money = 0;
     }
     public void AddMoney()
     {

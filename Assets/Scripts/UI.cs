@@ -89,7 +89,5 @@ public class UI : MonoBehaviour
         }
     }
 
-    //Fix Levels, if left side is picked then right side is blocked and vice versa
-    //Find how to access enum state
-
+   
 }

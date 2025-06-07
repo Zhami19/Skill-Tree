@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Collections;
 using Unity.VisualScripting;
 
-public class DemoGamePlay : MonoBehaviour
+public class DemoGamePlay : MonoBehaviour, IDataPersistence
 {
     [SerializeField] GameObject triangle1, triangle2, triangle3, triangle4, triangle5, triangle6, triangle7, triangle8;
 
@@ -22,6 +22,8 @@ public class DemoGamePlay : MonoBehaviour
 
     private bool path1 = false;
     private bool path2 = false;
+
+    private List<int> unlockedNumbers;
 
     public enum Level
     {
@@ -122,6 +124,7 @@ public class DemoGamePlay : MonoBehaviour
         theUI.NoButton(4);
         theUI.NoButton(5);
         currentLevel = Level.Over;
+        unlockedNumbers.Add(7);
     }
 
     public void UnlockSkill6()
@@ -134,6 +137,7 @@ public class DemoGamePlay : MonoBehaviour
         theUI.NoButton(4);
         theUI.NoButton(6);
         currentLevel = Level.Over;
+        unlockedNumbers.Add(6);
     }
 
     public void UnlockSkill5()
@@ -146,6 +150,7 @@ public class DemoGamePlay : MonoBehaviour
         theUI.NoButton(5);
         theUI.NoButton(6);
         currentLevel = Level.Over;
+        unlockedNumbers.Add(5);
     }
 
     public void UnlockSkill4()
@@ -158,6 +163,7 @@ public class DemoGamePlay : MonoBehaviour
         theUI.NoButton(5);
         theUI.NoButton(6);
         currentLevel = Level.Over;
+        unlockedNumbers.Add(4);
     }
 
     public void UnlockSkill3()
@@ -169,6 +175,7 @@ public class DemoGamePlay : MonoBehaviour
         theUI.NoButton(1);
         currentLevel = Level.Level3;
         path2 = true;
+        unlockedNumbers.Add(3);
     }
 
     public void UnlockSkill2()
@@ -180,6 +187,7 @@ public class DemoGamePlay : MonoBehaviour
         theUI.NoButton(2);
         currentLevel = Level.Level3;
         path1 = true;
+        unlockedNumbers.Add(2);
     }
 
     public void UnlockSkill1()
@@ -189,6 +197,17 @@ public class DemoGamePlay : MonoBehaviour
         theUI.ChosenSkill(0);
         m.SubtractMoney(10);
         currentLevel = Level.Level2;
+        unlockedNumbers.Add(1);
+    }
+
+    public void LoadData(GameData data)
+    {
+        this.unlockedNumbers = data.unlockedNumbers;
+    }
+
+    public void SaveData(ref GameData data)
+    {
+        data.unlockedNumbers = this.unlockedNumbers;
     }
 
     //Have different lists (maybe "unused", "not chosen", and "selected") and load all of these.

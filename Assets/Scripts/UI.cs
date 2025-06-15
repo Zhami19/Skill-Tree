@@ -37,6 +37,7 @@ public class UI : MonoBehaviour
         c.a = 255;
         buttonImage.color = c;*/
         buttonImage.color = Color.blue;
+        Debug.Log(buttonImage.color);
     }
 
     public void DisableButton(int button)

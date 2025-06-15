@@ -624,7 +624,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill5
+        m_MethodName: UnlockSkill6
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -833,7 +833,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill2
+        m_MethodName: UnlockSkill3
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1596,7 +1596,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill1
+        m_MethodName: UnlockSkill2
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1729,7 +1729,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill3
+        m_MethodName: UnlockSkill4
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1894,7 +1894,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill7
+        m_MethodName: UnlockSkill8
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -2208,7 +2208,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill4
+        m_MethodName: UnlockSkill5
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -3676,7 +3676,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1157792260}
         m_TargetAssemblyTypeName: DemoGamePlay, Assembly-CSharp
-        m_MethodName: UnlockSkill6
+        m_MethodName: UnlockSkill7
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

@@ -14,14 +14,24 @@ public class UI : MonoBehaviour
     [SerializeField] GameObject moneySystem;
     private MoneySystem m;
 
-    [SerializeField] Image button1, button2, button3, button4, button5, button6, button7;
-    private List<Image> buttonList;
+    [SerializeField]  GameObject button1, button2, button3, button4, button5, button6, button7;
+    private List<GameObject> buttonList;
+
+    [SerializeField] Image Ibutton1, Ibutton2, Ibutton3, Ibutton4, Ibutton5, Ibutton6, Ibutton7;
+    private List<Image> IbuttonList;
     // Start is called once before the first execution of Update after the MonoBehaviour is created
+
+    private void Awake()
+    {
+        buttonList = new List<GameObject> { button1, button2, button3, button4, button5, button6, button7 };
+        IbuttonList = new List<Image> { Ibutton1, Ibutton2, Ibutton3, Ibutton4, Ibutton5, Ibutton6, Ibutton7 };
+    }
+
     void Start()
     {
         g = gamePlay.GetComponent<DemoGamePlay>();  
         m = moneySystem.GetComponent<MoneySystem>();
-        buttonList = new List<Image> { button1, button2, button3, button4, button5, button6, button7 };    
+            
     }
 
     // Update is called once per frame
@@ -32,12 +42,11 @@ public class UI : MonoBehaviour
 
     public void ChosenSkill(int button)
     {
-        Image buttonImage = buttonList[button];
+        Image buttonImage = IbuttonList[button];
         /*Color c = buttonImage.color;
         c.a = 255;
         buttonImage.color = c;*/
         buttonImage.color = Color.blue;
-        Debug.Log(buttonImage.color);
     }
 
     public void DisableButton(int button)
@@ -53,13 +62,13 @@ public class UI : MonoBehaviour
     public void NoButton(int button)
     {
         Destroy(buttonList[button].gameObject.GetComponent<Button>());
-        Image buttonImage = buttonList[button];
+        Image buttonImage = IbuttonList[button];
         buttonImage.color = Color.red;
     }
 
     public void AvailableColor(int button)
     {
-        Image buttonImage = buttonList[button];
+        Image buttonImage = IbuttonList[button];
         if (button == 0 && m.Money >= 10)
         {
             buttonImage.color = Color.white;

@@ -15,6 +15,7 @@ public class DemoGamePlay : MonoBehaviour, IDataPersistence
 
 
     private List<GameObject> unlockedSkills;
+
     [SerializeField] GameObject moneySystem;
     private MoneySystem m;
 
@@ -102,10 +103,10 @@ public class DemoGamePlay : MonoBehaviour, IDataPersistence
     void Awake()
     {
         unlockedSkills = new List<GameObject>();
+        theUI = UI.GetComponent<UI>();
     }
     void Start()
     {
-        theUI = UI.GetComponent<UI>();
         m = moneySystem.GetComponent<MoneySystem>();
 
         unlockedSkills.Add(triangle1);
@@ -249,11 +250,10 @@ public class DemoGamePlay : MonoBehaviour, IDataPersistence
 
     public void LoadSkill(int skillNumber)
     {
+        if (skillNumber >= 2) theUI.ChosenSkill(skillNumber - 2);
+
         switch (skillNumber)
         {
-            case 1:
-                Debug.Log("case 1 was performed");
-                break;
             case 2:
                 unlockedSkills.Add(triangle2);
                 break;
@@ -278,6 +278,11 @@ public class DemoGamePlay : MonoBehaviour, IDataPersistence
         }
     }
 
+    public void LoadUnused(int buttonIndex)
+    {
+        theUI.NoButton(buttonIndex);
+    }
+
     public void LoadData(GameData data)
     {
         foreach (KeyValuePair<int, string> pair in data.skillStates)
@@ -285,6 +290,10 @@ public class DemoGamePlay : MonoBehaviour, IDataPersistence
             if (pair.Value == "Unlocked")
             {
                 LoadSkill(pair.Key);
+            }
+            else if (pair.Value == "Unused")
+            {
+                LoadUnused(pair.Key - 2);
             }
         }
 
